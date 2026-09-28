@@ -35,11 +35,14 @@ function Ajouter_candidat(condidats){
         console.log("vous n'etes pas autorise a enregistrer")
       age= Number(prompt("enter age :"))
  }
+   // let condidat={
+        //cin:cin,nom:nom,prenom:prenom,partipolitique:parti,Age:age,electeurs:[]
+    //}
     let condidat={
-        Cin:cin,Nom:nom,Prenom:prenom,partipolitique:parti,Age:age,electeurs:[]
-    }
+    cin: cin, nom: nom, prenom: prenom, partiPolitique: parti, age: age, electeurs:[]
+}
     condidats.push(condidat)
-return condidats
+return
  }
  function Ajouter_plusieurs(condidats){
 let u=Number(prompt("combien voulez-vous ajouter"))
@@ -48,22 +51,24 @@ let u=Number(prompt("combien voulez-vous ajouter"))
  }
  }
  /////////////######3:AFFICHE LA LISTE########////////////
- function Afficher_la_liste(){
-    let choix=prompt("De quelle maniere souhaitez-vous vois la presentation Decroissant/parti :")
-function Affiche_decroissant(){ 
-  for(let x=0;x<condidats.length;x++){
-    for(let j=0;j<condidats.length-1-x;j++){
-        if(condidats[j].electeurs.length<=condidats[j+1].electeurs.length){
-            let temp=condidats[j]
-            condidats[j]=condidats[j+1]
-            condidats[j+1]=temp
+ function Affiche_decroissant(arr){ 
+  for(let x=0;x<arr.length;x++){
+    for(let j=0;j<arr.length-1-x;j++){
+        if(arr[j].electeurs.length<=arr[j+1].electeurs.length){
+            let temp=arr[j]
+            arr[j]=arr[j+1]
+            arr[j+1]=temp
         }
     }
     
   }
- console.log(condidats)
+ 
 
 }
+ 
+ function Afficher_la_liste(){
+  let sort_condidats=[...condidats];
+    let choix=prompt("De quelle maniere souhaitez-vous vois la presentation Decroissant/parti :")
     function Afficher_parti(){
         let part=prompt("Quel parti voulez-vous");
     for(let a=0;a<condidats.length;a++){
@@ -75,10 +80,26 @@ function Affiche_decroissant(){
     }
      
   }
- if(choix==="Decroissant")
-    Affiche_decroissant()
+ if(choix==="Decroissant"){
+    Affiche_decroissant(sort_condidats)
+    for(let condidat of sort_condidats)
+  console.log(`cin: ${condidat.cin}
+    nom: ${condidat.nom}
+    prenom: ${condidat.prenom}
+    partiPolitique: ${condidat.partiPolitique}
+    age: ${condidat.age}
+    electeurs:${condidat.electeurs.length}`)
+  }
 else if(choix==="parti"){
-    Afficher_parti();
+    Afficher_parti(condidats);
+    for(let condidatt of condidats)
+console.log(`
+  cin: ${condidatt.cin}
+    nom: ${condidatt.nom}
+    prenom: ${condidatt.prenom}
+    partiPolitique: ${condidatt.partiPolitique}
+    age: ${condidatt.age}
+    electeurs:${condidatt.electeurs.length}`);
 }
 else {
     console.log("le chois est faux")
@@ -125,9 +146,9 @@ function Modifier_informations(){
                 let new_age=Number(prompt("entre le new age"))
                     condidats[i].age=new_age
                     return
-                
-
             }
+
+            
             else if(change==="parti"){
                 let new_parti=prompt("entre le new parti")
                 condidats[i].partiPolitique=new_parti
@@ -135,31 +156,81 @@ function Modifier_informations(){
             }
             else 
                 console.log("le chois est faux")
-            Modifier_informations()
             return
-
+        }
 
         }
         if(!isfound){
             console.log("no trouve pas la cin")
             Modifier_informations()
             return
-        }}
+        }
      }
      Ajouter_candidat(condidats)
      Ajouter_plusieurs(condidats)
      Afficher_la_liste()
      votre_pour()
      Modifier_informations()
+     Supprime_un_condidat()
 ///////////########SUPPRIMER UN candidat #######////////////
-function Supprime_un_RTCIceCandidate(){
-let suprim=prompt("quel le CIN de condidat tu vous suprimie")
-let verifier=false
-for(let i of condidats){
-    if(suprim===i.cin){
-        console.log("on va trouve candidats")
-        verifier=true
-        }
+function Supprime_un_condidat(){
+let u=prompt("entre le cin tu vue suprime")
+ let index=-1
+  let infound=false;
+for(let i=0;i<condidats.length;i++){
+  if(u===condidats[i].cin){
+    infound=true;
+    index=i
+  }
+}
+if(!infound){
+  console.log("your enter is faux")
+  return 
+}
+else {
+  condidats.splice(index,1)
+  console.log("your suprime is accepte")}}
+  /////////////#########Rechercher des candidats#########/////////
+function Rechercher_des_candidats(){
+  let name=prompt("entre le name de condidats")
+  let infound=false
+  for(let i=0;i<condidats.length;i++){
+    if(name===condidats[i].nom){
+      infound=true
+      console.log(`cin: ${condidats[i].cin}
+        nom: ${condidats[i].nom}
+        prenom: ${condidats[i].prenom}
+        partiPolitique: ${condidats[i].partiPolitique}
+        age: ${condidats[i].age}
+        electeurs: ${condidats[i].electeurs.length}
+`) }
+  }
+  if(!infound){
+    console.log("no trouve pas le condidat")
+    return
+  }
+}
+/////////////////####Statistiques de l'élection####///////
+function Statistiques_de_élection(){
+function total_condidats(){
+  
+  console.log("le nombre total de candidats",condidats.length)
+}
+function Total_election(){
+  let sum=0
+  for(let i=0;i<condidats.length;i++){
+    sum=sum+condidats[i].electeurs.length;
+  }
+  console.log(" le nombre total de votes exprimés dans toute l'élection:",sum)
+}
+function Top_3_condidats(){
+  let copie=[]
+  copie=[...condidats]
+  Affiche_decroissant(copie)
+  for(let i=0;i<3;i++){
+    console.log(copie[i])
+  }
 
 }
+
 }
