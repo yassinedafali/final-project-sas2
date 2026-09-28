@@ -232,5 +232,15 @@ function Top_3_condidats(){
   }
 
 }
+function  number_of_candidates_per_political_party(){
+     let obj={}
+    
+     for(let i of condidats){
+       let part=i.partiPolitique
+      if(obj[part]){
+
+      }
+     }
+}
 
 }
