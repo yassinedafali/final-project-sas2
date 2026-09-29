@@ -19,9 +19,22 @@ let condidats=[{ cin: "AB123456", nom: "Boushaba", prenom: "Soufiane", partiPoli
     electeurs: ["CD234567", "EF345678", "MN789012"] },
   { cin: "ST012345", nom: "Fassi", prenom: "Khadija", partiPolitique: "PAM", age: 31,
     electeurs: [] },]
+   
+
 // #########AJOUTE CONIDATE##############
-function Ajouter_candidat(condidats){
+function Ajouter_candidat(){
     let cin=prompt("enterz le cin :")
+    let test =false
+    for(let c of condidats){
+      if(c.cin===cin){
+        test =true
+
+      }}
+      if(test){
+        console.log("le cin est déjà utilisé")
+        return
+      }
+    
     let nom=prompt("enter nom :")
     let prenom=prompt("enter prenom :")
     let parti=prompt("Parti politique :")
@@ -29,11 +42,19 @@ function Ajouter_candidat(condidats){
         parti="Indépendant"
     
     let age= Number(prompt("enter age :"))
+   
+   if(age<18){
+          console.log("you are -18")
+          return;
+       }
+   
 
-    while(!(Number.isInteger(age))||age<18){
+    while(!(Number.isInteger(age))){
+       
         
         console.log("vous n'etes pas autorise a enregistrer")
       age= Number(prompt("enter age :"))
+      
  }
    // let condidat={
         //cin:cin,nom:nom,prenom:prenom,partipolitique:parti,Age:age,electeurs:[]
@@ -42,12 +63,12 @@ function Ajouter_candidat(condidats){
     cin: cin, nom: nom, prenom: prenom, partiPolitique: parti, age: age, electeurs:[]
 }
     condidats.push(condidat)
-return
  }
- function Ajouter_plusieurs(condidats){
+ function Ajouter_plusieurs(){
 let u=Number(prompt("combien voulez-vous ajouter"))
      for(let i=0;i<u;i++){
-        Ajouter_candidat(condidats)
+      
+        Ajouter_candidat()
  }
  }
  /////////////######3:AFFICHE LA LISTE########////////////
@@ -69,7 +90,8 @@ let u=Number(prompt("combien voulez-vous ajouter"))
  function Afficher_la_liste(){
   let sort_condidats=[...condidats];
     let choix=prompt("De quelle maniere souhaitez-vous vois la presentation Decroissant/parti :")
-    function Afficher_parti(){
+    /////////////// afficher_par parti   
+   function Afficher_parti(){
         let part=prompt("Quel parti voulez-vous");
     for(let a=0;a<condidats.length;a++){
 
@@ -162,16 +184,16 @@ function Modifier_informations(){
         }
         if(!isfound){
             console.log("no trouve pas la cin")
-            Modifier_informations()
+        
             return
         }
      }
-     Ajouter_candidat(condidats)
-     Ajouter_plusieurs(condidats)
-     Afficher_la_liste()
-     votre_pour()
-     Modifier_informations()
-     Supprime_un_condidat()
+    //  Ajouter_candidat(condidats)
+    //  Ajouter_plusieurs(condidats)
+    //  Afficher_la_liste()
+    //  votre_pour()
+    //  Modifier_informations()
+    //  Supprime_un_condidat()
 ///////////########SUPPRIMER UN candidat #######////////////
 function Supprime_un_condidat(){
 let u=prompt("entre le cin tu vue suprime")
@@ -212,6 +234,25 @@ function Rechercher_des_candidats(){
 }
 /////////////////####Statistiques de l'élection####///////
 function Statistiques_de_élection(){
+  let u=Number(prompt("what parti: 1/2/3/4"))
+  switch(u){
+    case 1:
+      total_condidats();
+      break;
+    case 2:
+      Total_election();
+      break;
+    case 3:
+      Top_3_condidats();
+      break;
+    case 4:
+    number_of_candidates_per_political_party();
+    break;
+    default :
+    console.log("your choise is false")
+    break
+
+  }
 function total_condidats(){
   
   console.log("le nombre total de candidats",condidats.length)
@@ -236,21 +277,69 @@ function  number_of_candidates_per_political_party(){
      console.log(`--- Candidates per Party ---`);
     let partyCounts = {};
 
-    for (let candidate of candidatesList) {
-    let party = candidate.politicalParty
+    for (let candidate of condidats) {
+    let party = candidate.partiPolitique
     if (partyCounts[party]) {
         partyCounts[party]++;
     } else {
         partyCounts[party] = 1;
     }
     }
-
     for (let party in partyCounts) {
-       console.log(`${party}: ${partyCounts[party]}`);
-    }
+    console.log(`${party}: ${partyCounts[party]}`);
+}
     console.log("------------")
       }
      }
-     
+     /////////welcome to menu
+
+      while(true){
+    console.log("welcome meno:",
+      "1:Ajouter un condidat",
+      "2: Ajouter plusieurs candidats",
+      "3: Afficher la liste de condidats",
+      "4: voter pour un candidat",
+      "5: Modifier les informations",
+      "6: Supprimer un condidat",
+      "7: Rechercher des candidats",
+      "8: Statistiques de l'election"
+
+    )
+    let choise=Number(prompt("what your choise"));
+    switch(choise){
+      case 1 :
+        Ajouter_candidat();
+        break
+        case 2 :
+        Ajouter_plusieurs();
+        break
+        case 3 :
+          Afficher_la_liste();
+        break
+        case 4 :
+          votre_pour();
+          break
+        case 5 :
+            Modifier_informations()
+            break;
+        case 6 :
+           Supprime_un_condidat()
+           break;
+        case 7 :
+            Rechercher_des_candidats()
+            break;
+        case 8 :
+          Statistiques_de_élection();
+          break;
+        case 0 :
+          console.log("good bye")
+        return 
+        default :
+        console.log("choise est faux")
+        break
+          
+    }
+  }
+
 
 
