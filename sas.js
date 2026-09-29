@@ -19,7 +19,7 @@ let condidats=[{ cin: "AB123456", nom: "Boushaba", prenom: "Soufiane", partiPoli
     electeurs: ["CD234567", "EF345678", "MN789012"] },
   { cin: "ST012345", nom: "Fassi", prenom: "Khadija", partiPolitique: "PAM", age: 31,
     electeurs: [] },]
-   
+
 
 // #########AJOUTE CONIDATE##############
 function Ajouter_candidat(){
@@ -43,26 +43,27 @@ function Ajouter_candidat(){
     
     let age= Number(prompt("enter age :"))
    
-   if(age<18){
-          console.log("you are -18")
-          return;
-       }
    
+   while(!(Number.isInteger(age))|| age<18 ){
+    if(!(Number.isInteger(age))){
 
-    while(!(Number.isInteger(age))){
-       
-        
-        console.log("vous n'etes pas autorise a enregistrer")
-      age= Number(prompt("enter age :"))
+     console.log("vous n'etes pas autorise a enregistrer")
+      age= Number(prompt("enter age :"))}
+      if(age<18){
+          console.log("you are minor")
+          return 
+       }}
       
- }
+ 
    // let condidat={
         //cin:cin,nom:nom,prenom:prenom,partipolitique:parti,Age:age,electeurs:[]
     //}
+    
     let condidat={
     cin: cin, nom: nom, prenom: prenom, partiPolitique: parti, age: age, electeurs:[]
 }
     condidats.push(condidat)
+    console.log("le condidats elle ajoute")
  }
  function Ajouter_plusieurs(){
 let u=Number(prompt("combien voulez-vous ajouter"))
@@ -148,7 +149,8 @@ function votre_pour(){
         for(let i of condidats){
           if(n===i.cin){
             verifier=true
-            i.electeurs.push(u)}}
+            i.electeurs.push(u)}
+            console.log("vous vote est accepte")}
              }
              if(!verifier){
                 console.log("Nous trouve pas les condidats")
@@ -294,17 +296,18 @@ function  number_of_candidates_per_political_party(){
      /////////welcome to menu
 
       while(true){
-    console.log("welcome meno:",
-      "1:Ajouter un condidat",
-      "2: Ajouter plusieurs candidats",
-      "3: Afficher la liste de condidats",
-      "4: voter pour un candidat",
-      "5: Modifier les informations",
-      "6: Supprimer un condidat",
-      "7: Rechercher des candidats",
-      "8: Statistiques de l'election"
+    console.log("welcome meno:")
+      console.log("1:Ajouter un condidat")
+      console.log("2: Ajouter plusieurs candidats")
+      console.log("3: Afficher la liste de condidats")
+      console.log("4: voter pour un candidat")
+      console.log("5: Modifier les informations")
+      console.log("6: Supprimer un condidat")
+     console.log( "7: Rechercher des candidats")
+    console.log( "8: Statistiques de l'election")
+    console.log("0: Exit")
 
-    )
+    
     let choise=Number(prompt("what your choise"));
     switch(choise){
       case 1 :
@@ -340,6 +343,3 @@ function  number_of_candidates_per_political_party(){
           
     }
   }
-
-
-
