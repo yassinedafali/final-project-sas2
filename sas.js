@@ -97,7 +97,12 @@ let u=Number(prompt("combien voulez-vous ajouter"))
     for(let a=0;a<condidats.length;a++){
 
         if(part===condidats[a].partiPolitique){
-            console.log(condidats[a])
+            console.log(`cin: ${condidats[a].cin}
+    nom: ${condidats[a].nom}
+    prenom: ${condidats[a].prenom}
+    partiPolitique: ${condidats[a].partiPolitique}
+    age: ${condidats[a].age}
+    electeurs:${condidats[a].electeurs.length}`);
         }
     
     }
@@ -115,14 +120,7 @@ let u=Number(prompt("combien voulez-vous ajouter"))
   }
 else if(choix==="parti"){
     Afficher_parti(condidats);
-    for(let condidatt of condidats)
-console.log(`
-  cin: ${condidatt.cin}
-    nom: ${condidatt.nom}
-    prenom: ${condidatt.prenom}
-    partiPolitique: ${condidatt.partiPolitique}
-    age: ${condidatt.age}
-    electeurs:${condidatt.electeurs.length}`);
+  
 }
 else {
     console.log("le chois est faux")
@@ -150,7 +148,9 @@ function votre_pour(){
           if(n===i.cin){
             verifier=true
             i.electeurs.push(u)}
-            console.log("vous vote est accepte")}
+            console.log("vous vote est accepte")
+          return
+        }
              }
              if(!verifier){
                 console.log("Nous trouve pas les condidats")
@@ -236,6 +236,10 @@ function Rechercher_des_candidats(){
 }
 /////////////////####Statistiques de l'élection####///////
 function Statistiques_de_élection(){
+  console.log("1 :Display the total number of candidates.")
+- console.log("Display the total number of votes cast in the entire election")
+- console.log("Display the Top 3 candidates with the most votes")
+- console.log("Display the number of candidates per political party")
   let u=Number(prompt("what parti: 1/2/3/4"))
   switch(u){
     case 1:
@@ -339,7 +343,7 @@ function  number_of_candidates_per_political_party(){
         return 
         default :
         console.log("choise est faux")
-        break
+        break 
           
     }
   }
