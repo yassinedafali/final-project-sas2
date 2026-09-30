@@ -237,10 +237,10 @@ function Rechercher_des_candidats(){
 /////////////////####Statistiques de l'élection####///////
 function Statistiques_de_élection(){
   console.log("1 :Display the total number of candidates.")
-- console.log("Display the total number of votes cast in the entire election")
-- console.log("Display the Top 3 candidates with the most votes")
-- console.log("Display the number of candidates per political party")
-  let u=Number(prompt("what parti: 1/2/3/4"))
+- console.log("2:Display the total number of votes cast in the entire election")
+- console.log("3:Display the Top 3 candidates with the most votes")
+- console.log("4:Display the number of candidates per political party")
+  let u=Number(prompt("what parti: 1/2/3/4 =>"))
   switch(u){
     case 1:
       total_condidats();
