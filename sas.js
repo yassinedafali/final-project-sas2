@@ -341,9 +341,27 @@ function  number_of_candidates_per_political_party(){
         case 0 :
           console.log("good bye")
         return 
+        case 9:
+          maxi();
         default :
         console.log("choise est faux")
         break 
           
     }
   }
+function maxi(){
+  for(let i=0;i<condidats.length;i++){
+    for(let j=0;j<condidats.length-1-i;j++){
+      if(condidats[j+1].electeurs.length>condidats[j].electeurs.length){
+        let temp=condidats[j+1]
+        condidats[j+1]=condidats[j]
+        condidats[j]=temp
+
+      }
+    }
+
+  }
+  console.log(condidats[1])
+
+}
+  
